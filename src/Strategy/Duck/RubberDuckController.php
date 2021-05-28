@@ -2,6 +2,7 @@
 
 namespace App\Strategy\Duck;
 
+use App\Strategy\Behavior\DanceNoWayBehaviorController;
 use App\Strategy\Behavior\FlyNoWayBehaviorController;
 use App\Strategy\Behavior\SqueakBehaviorController;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -17,15 +18,12 @@ class RubberDuckController extends DuckController
     {
         $this->setFlyBehavior(new FlyNoWayBehaviorController());
         $this->setQuackBehavior(new SqueakBehaviorController());
+        $this->setDanceBehavior(new DanceNoWayBehaviorController());
     }
 
     public function display(): void
     {
         echo '<b>I\'m rubber duck</b> ' ;
-    }
-
-    public function dance(): void
-    {
     }
 
 }

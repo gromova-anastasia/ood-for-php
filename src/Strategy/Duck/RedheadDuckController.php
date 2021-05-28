@@ -2,6 +2,7 @@
 
 namespace App\Strategy\Duck;
 
+use App\Strategy\Behavior\DanceMinuetBehaviorController;
 use App\Strategy\Behavior\FlyWithWingsBehaviorController;
 use App\Strategy\Behavior\QuackBehaviorController;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -17,6 +18,7 @@ class RedheadDuckController extends DuckController
     {
         $this->setFlyBehavior(new FlyWithWingsBehaviorController());
         $this->setQuackBehavior(new QuackBehaviorController());
+        $this->setDanceBehavior(new DanceMinuetBehaviorController());
     }
 
     public function display(): void

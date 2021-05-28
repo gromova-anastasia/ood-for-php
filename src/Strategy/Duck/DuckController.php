@@ -2,6 +2,7 @@
 
 namespace App\Strategy\Duck;
 
+use App\Strategy\Behavior\DanceBehaviorInterface;
 use App\Strategy\Behavior\FlyBehaviorInterface;
 use App\Strategy\Behavior\QuackBehaviorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,6 +16,9 @@ class DuckController extends AbstractController implements FlyBehaviorInterface,
 
     /** @var QuackBehaviorInterface $quackBehavior */
     private $quackBehavior;
+
+    /** @var DanceBehaviorInterface $danceBehavior */
+    private $danceBehavior;
 
     public function display(): void
     {
@@ -30,16 +34,15 @@ class DuckController extends AbstractController implements FlyBehaviorInterface,
         $this->flyBehavior->fly();
     }
 
+    public function dance(): void
+    {
+        $this->danceBehavior->dance();
+    }
+
     public function swim(): void
     {
         echo 'I\'m swimming ' ;
     }
-
-    public function dance(): void
-    {
-        echo 'I\'m dancing ' ;
-    }
-
 
     /**
      * @param FlyBehaviorInterface $flyBehavior
@@ -55,6 +58,14 @@ class DuckController extends AbstractController implements FlyBehaviorInterface,
     public function setQuackBehavior(QuackBehaviorInterface $quackBehavior): void
     {
         $this->quackBehavior = $quackBehavior;
+    }
+
+    /**
+     * @param DanceBehaviorInterface $danceBehavior
+     */
+    public function setDanceBehavior(DanceBehaviorInterface $danceBehavior): void
+    {
+        $this->danceBehavior = $danceBehavior;
     }
 
 }
