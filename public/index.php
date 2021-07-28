@@ -1,27 +1,32 @@
 <?php
+requireFiles();
 
-use App\Kernel;
-use Symfony\Component\ErrorHandler\Debug;
-use Symfony\Component\HttpFoundation\Request;
+use App\Strategy\DefaultController;
 
-require dirname(__DIR__).'/config/bootstrap.php';
+$controller = new DefaultController();
+$controller->actionIndex();
 
-if ($_SERVER['APP_DEBUG']) {
-    umask(0000);
 
-    Debug::enable();
+function requireFiles()
+{
+    require_once __DIR__ . '/../src/Strategy/Behavior/DanceBehaviorInterface.php';
+    require_once __DIR__ . '/../src/Strategy/Behavior/FlyBehaviorInterface.php';
+    require_once __DIR__ . '/../src/Strategy/Behavior/QuackBehaviorInterface.php';
+    require_once __DIR__ . '/../src/Strategy/Behavior/QuackBehaviorController.php';
+    require_once __DIR__ . '/../src/Strategy/Behavior/DanceMinuetBehaviorController.php';
+    require_once __DIR__ . '/../src/Strategy/Behavior/DanceNoWayBehaviorController.php';
+    require_once __DIR__ . '/../src/Strategy/Behavior/DanceWaltzBehaviorController.php';
+    require_once __DIR__ . '/../src/Strategy/Behavior/FlyNoWayBehaviorController.php';
+    require_once __DIR__ . '/../src/Strategy/Behavior/FlyWithWingsBehaviorController.php';
+    require_once __DIR__ . '/../src/Strategy/Behavior/MuteQuackBehaviorController.php';
+    require_once __DIR__ . '/../src/Strategy/Behavior/SqueakBehaviorController.php';
+
+    require_once __DIR__ . '/../src/Strategy/Duck/DuckController.php';
+    require_once __DIR__ . '/../src/Strategy/Duck/MallardDuckController.php';
+    require_once __DIR__ . '/../src/Strategy/Duck/ModelDuckController.php';
+    require_once __DIR__ . '/../src/Strategy/Duck/RedheadDuckController.php';
+    require_once __DIR__ . '/../src/Strategy/Duck/RubberDuckController.php';
+    require_once __DIR__ . '/../src/Strategy/Duck/DecoyDuckController.php';
+
+    require_once __DIR__ . '/../src/Strategy/DefaultController.php';
 }
-
-if ($trustedProxies = $_SERVER['TRUSTED_PROXIES'] ?? false) {
-    Request::setTrustedProxies(explode(',', $trustedProxies), Request::HEADER_X_FORWARDED_FOR | Request::HEADER_X_FORWARDED_PORT | Request::HEADER_X_FORWARDED_PROTO);
-}
-
-if ($trustedHosts = $_SERVER['TRUSTED_HOSTS'] ?? false) {
-    Request::setTrustedHosts([$trustedHosts]);
-}
-
-$kernel = new Kernel($_SERVER['APP_ENV'], (bool) $_SERVER['APP_DEBUG']);
-$request = Request::createFromGlobals();
-$response = $kernel->handle($request);
-$response->send();
-$kernel->terminate($request, $response);

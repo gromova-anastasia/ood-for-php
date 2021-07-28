@@ -5,11 +5,7 @@ namespace App\Strategy\Duck;
 use App\Strategy\Behavior\DanceBehaviorInterface;
 use App\Strategy\Behavior\FlyBehaviorInterface;
 use App\Strategy\Behavior\QuackBehaviorInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
-
-class DuckController extends AbstractController implements FlyBehaviorInterface, QuackBehaviorInterface
+class DuckController implements FlyBehaviorInterface, QuackBehaviorInterface
 {
     /** @var FlyBehaviorInterface $flyBehavior */
     private $flyBehavior;

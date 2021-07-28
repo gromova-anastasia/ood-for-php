@@ -1,7 +1,0 @@
-strategy:
-    resource: ../../src/Strategy/
-    type: annotation
-
-kernel:
-    resource: ../../src/Kernel.php
-    type: annotation

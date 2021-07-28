@@ -9,19 +9,11 @@ use App\Strategy\Duck\MallardDuckController;
 use App\Strategy\Duck\ModelDuckController;
 use App\Strategy\Duck\RedheadDuckController;
 use App\Strategy\Duck\RubberDuckController;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/strategy")
- */
-class DefaultController extends AbstractController
+class DefaultController
 {
-    /**
-     * @Route("/", name="strategy:index")
-     */
-    public function index(): Response
+
+    public function actionIndex(): string
     {
         $ducks = [
             'mallard' => new MallardDuckController(),
@@ -40,7 +32,7 @@ class DefaultController extends AbstractController
         $modelDuck->setFlyBehavior(new FlyWithWingsBehaviorController());
         $this->playWithDuck($modelDuck);
 
-        return new Response('');
+        return '';
     }
 
     private function playWithDuck(DuckController $duck): void
